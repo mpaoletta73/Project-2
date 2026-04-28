@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Project 2: Persuasive or Deceptive Visualization?</title>
+  <style>
+    /* ── Reset & Base ─────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --pro-color:  #2a7a4f;
+      --con-color:  #b03a2e;
+      --bg:         #f7f8fa;
+      --card-bg:    #ffffff;
+      --border:     #e0e4ea;
+      --text:       #1a1d23;
+      --muted:      #5f6778;
+      --accent:     #3b5bdb;
+      --radius:     10px;
+    }
+
+    body {
+      font-family: 'Segoe UI', system-ui, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+    }
+
+    /* ── Header ───────────────────────────────────── */
+    header {
+      background: linear-gradient(135deg, #1a1d23 0%, #2c3047 100%);
+      color: #fff;
+      padding: 3rem 2rem 2.5rem;
+      text-align: center;
+    }
+    header .label {
+      display: inline-block;
+      background: var(--accent);
+      color: #fff;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+      margin-bottom: 1rem;
+    }
+    header h1 {
+      font-size: clamp(1.6rem, 4vw, 2.6rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.5rem;
+    }
+    header .subtitle {
+      font-size: 1rem;
+      color: #a9b4c9;
+      max-width: 680px;
+      margin: 0 auto 1.5rem;
+    }
+
+    /* Group member pills */
+    .members {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+    .member-pill {
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 20px;
+      padding: 0.3rem 0.9rem;
+      font-size: 0.85rem;
+      color: #dce4f0;
+    }
+
+    /* ── Main layout ──────────────────────────────── */
+    main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem 4rem;
+    }
+
+    /* ── Section cards ────────────────────────────── */
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2rem 2.2rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+    }
+
+    .section-heading {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.5rem;
+    }
+    h2 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+    h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 0.6rem;
+    }
+
+    /* Proposition banner */
+    .proposition-box {
+      border-left: 5px solid var(--accent);
+      background: #eef1fd;
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: 1.2rem 1.5rem;
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--accent);
+      margin: 0.5rem 0 0;
+    }
+
+    /* ── Vis sections ─────────────────────────────── */
+    .vis-section {
+      margin-bottom: 2.5rem;
+    }
+
+    .vis-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1.1rem;
+    }
+    .vis-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.35rem 1rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    .badge-pro  { background: #d4edda; color: var(--pro-color); border: 1px solid #a8d5b5; }
+    .badge-con  { background: #fde8e8; color: var(--con-color); border: 1px solid #f0b0aa; }
+
+    .vis-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+    }
+
+    /* Image container */
+    .vis-image-wrap {
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      margin-bottom: 1.5rem;
+      background: #fafafa;
+      text-align: center;
+    }
+    .vis-image-wrap img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* ── Design decisions table ───────────────────── */
+    .decisions-grid {
+      display: grid;
+      gap: 1rem;
+      margin-top: 0.25rem;
+    }
+
+    .decision-card {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem 1.2rem;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 0.5rem 1.1rem;
+      align-items: start;
+    }
+
+    .decision-num {
+      grid-row: span 3;
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 0.9rem;
+      flex-shrink: 0;
+      margin-top: 0.15rem;
+    }
+    .decision-num.pro { background: #d4edda; color: var(--pro-color); }
+    .decision-num.con { background: #fde8e8; color: var(--con-color); }
+
+    .decision-title {
+      font-weight: 700;
+      font-size: 0.95rem;
+    }
+
+    .score-row {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.8rem;
+    }
+    .score-label { color: var(--muted); }
+    .score-bar-wrap {
+      flex: 1;
+      height: 6px;
+      background: #e5e7eb;
+      border-radius: 3px;
+      position: relative;
+      max-width: 160px;
+    }
+    .score-bar {
+      position: absolute;
+      top: 0;
+      height: 100%;
+      border-radius: 3px;
+    }
+    /* score is –2 to +2; centre at 50% width */
+    /* JS sets --score-val; fallback neutral */
+    .score-value { font-weight: 700; font-size: 0.85rem; }
+
+    .decision-body {
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+    .placeholder-text {
+      font-style: italic;
+      color: #aab0bc;
+    }
+
+    /* ── Reflection ───────────────────────────────── */
+    .reflection-body p {
+      margin-bottom: 1rem;
+      font-size: 0.95rem;
+      color: var(--muted);
+    }
+    .reflection-body p:last-child { margin-bottom: 0; }
+
+    /* ── Divider ──────────────────────────────────── */
+    .vis-divider {
+      border: none;
+      border-top: 2px dashed var(--border);
+      margin: 2.5rem 0;
+    }
+
+    /* ── Footer ───────────────────────────────────── */
+    footer {
+      text-align: center;
+      padding: 1.5rem;
+      font-size: 0.8rem;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+    }
+
+    /* ── Score helpers (rendered via JS) ─────────── */
+    .score-pip {
+      display: inline-block;
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      vertical-align: middle;
+      margin-right: 4px;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ════════════════════════ HEADER ════════════════════════ -->
+<header>
+  <div class="label">DSC 106 · Project 2</div>
+  <h1>Persuasive and Deceptive Visualizations</h1>
+  <div class="members">
+    <span class="member-pill">Matthew Paoletta · mpaoletta@ucsd.edu</span>
+    <span class="member-pill">Gilad Segal · gsegal@ucsd.edu</span>
+    <span class="member-pill">Sancho Syquia · ssyquia@ucsd.edu</span>
+    <span class="member-pill">Thomas Deitel · tdeitel@ucsd.edu</span>
+  </div>
+</header>
+
+<!-- ════════════════════════ MAIN ════════════════════════ -->
+<main>
+
+  <!-- ── Proposition ── -->
+  <div class="card">
+    <div class="section-heading">Our Proposition</div>
+    <h2>Dataset: World Bank Human Development Indicators (1960–2020)</h2>
+    <div class="proposition-box">
+      "Countries with higher enrollment in education are more economically prosperous."
+    </div>
+  </div>
+
+  <!-- ═══════════════ VIS 1 – PRO ═══════════════ -->
+  <div class="card vis-section">
+    <div class="vis-header">
+      <span class="vis-badge badge-pro">Proposition</span>
+      <span class="vis-title">More Educated Countries Are Wealthier Countries</span>
+    </div>
+
+    <div class="vis-image-wrap">
+      <img src="proposition.png"
+           alt="Bar chart showing average GDP per capita rising monotonically across tertiary enrollment percentile groups, from $0.4k at the 0–10th percentile to $22.4k at the 90–100th percentile." />
+    </div>
+
+    <!-- ── Design Decisions ── -->
+    <h3>Design Decisions &amp; Rationale</h3>
+    <div class="decisions-grid" id="pro-decisions">
+
+      <div class="decision-card">
+        <div class="decision-num pro">1</div>
+        <div class="decision-title">Decision title — <em class="placeholder-text">to be filled in by group</em></div>
+        <div class="score-row">
+          <span class="score-label">Earnestness score:</span>
+          <span class="score-value placeholder-text">–</span>
+        </div>
+        <div class="decision-body placeholder-text">
+          2–3 sentence rationale explaining how this decision makes the visualization persuasive,
+          what worked, what alternatives were considered, and why you settled on this one.
+        </div>
+      </div>
+
+      <div class="decision-card">
+        <div class="decision-num pro">2</div>
+        <div class="decision-title">Decision title — <em class="placeholder-text">to be filled in by group</em></div>
+        <div class="score-row">
+          <span class="score-label">Earnestness score:</span>
+          <span class="score-value placeholder-text">–</span>
+        </div>
+        <div class="decision-body placeholder-text">
+          2–3 sentence rationale explaining how this decision makes the visualization persuasive,
+          what worked, what alternatives were considered, and why you settled on this one.
+        </div>
+      </div>
+
+      <div class="decision-card">
+        <div class="decision-num pro">3</div>
+        <div class="decision-title">Decision title — <em class="placeholder-text">to be filled in by group</em></div>
+        <div class="score-row">
+          <span class="score-label">Earnestness score:</span>
+          <span class="score-value placeholder-text">–</span>
+        </div>
+        <div class="decision-body placeholder-text">
+          2–3 sentence rationale explaining how this decision makes the visualization persuasive,
+          what worked, what alternatives were considered, and why you settled on this one.
+        </div>
+      </div>
+
+      <div class="decision-card">
+        <div class="decision-num pro">4</div>
+        <div class="decision-title">Decision title — <em class="placeholder-text">to be filled in by group</em></div>
+        <div class="score-row">
+          <span class="score-label">Earnestness score:</span>
+          <span class="score-value placeholder-text">–</span>
+        </div>
+        <div class="decision-body placeholder-text">
+          2–3 sentence rationale explaining how this decision makes the visualization persuasive,
+          what worked, what alternatives were considered, and why you settled on this one.
+        </div>
+      </div>
+
+      <div class="decision-card">
+        <div class="decision-num pro">5</div>
+        <div class="decision-title">Decision title — <em class="placeholder-text">to be filled in by group</em></div>
+        <div class="score-row">
+          <span class="score-label">Earnestness score:</span>
+          <span class="score-value placeholder-text">–</span>
+        </div>
+        <div class="decision-body placeholder-text">
+          2–3 sentence rationale explaining how this decision makes the visualization persuasive,
+          what worked, what alternatives were considered, and why you settled on this one.
+        </div>
+      </div>
+
+    </div><!-- /pro-decisions -->
+  </div><!-- /card -->
+
+  <hr class="vis-divider" />
+
+  <!-- ═══════════════ VIS 2 – OPPOSING ═══════════════ -->
+  <div class="card vis-section">
+    <div class="vis-header">
+      <span class="vis-badge badge-con">Opposition</span>
+      <span class="vis-title">Spending More on Education Does Not Guarantee Better Outcomes</span>
+    </div>
+
+    <div class="vis-image-wrap">
+      <img src="opposing.png"
+           alt="Violin plot showing overlapping distributions of tertiary enrollment rates across four government-spending quartiles, with the highest-spending quartile having a lower median than the upper-middle quartile." />
+    </div>
+
+    <!-- ── Design Decisions ── -->
+    <h3>Design Decisions &amp; Rationale</h3>
+    <div class="decisions-grid" id="con-decisions">
+
+      <div class="decision-card">
+        <div class="decision-num con">1</div>
+        <div class="decision-title">Decision title — <em class="placeholder-text">to be filled in by group</em></div>
+        <div class="score-row">
+          <span class="score-label">Earnestness score:</span>
+          <span class="score-value placeholder-text">–</span>
+        </div>
+        <div class="decision-body placeholder-text">
+          2–3 sentence rationale explaining how this decision makes the visualization persuasive,
+          what worked, what alternatives were considered, and why you settled on this one.
+        </div>
+      </div>
+
+      <div class="decision-card">
+        <div class="decision-num con">2</div>
+        <div class="decision-title">Decision title — <em class="placeholder-text">to be filled in by group</em></div>
+        <div class="score-row">
+          <span class="score-label">Earnestness score:</span>
+          <span class="score-value placeholder-text">–</span>
+        </div>
+        <div class="decision-body placeholder-text">
+          2–3 sentence rationale explaining how this decision makes the visualization persuasive,
+          what worked, what alternatives were considered, and why you settled on this one.
+        </div>
+      </div>
+
+      <div class="decision-card">
+        <div class="decision-num con">3</div>
+        <div class="decision-title">Decision title — <em class="placeholder-text">to be filled in by group</em></div>
+        <div class="score-row">
+          <span class="score-label">Earnestness score:</span>
+          <span class="score-value placeholder-text">–</span>
+        </div>
+        <div class="decision-body placeholder-text">
+          2–3 sentence rationale explaining how this decision makes the visualization persuasive,
+          what worked, what alternatives were considered, and why you settled on this one.
+        </div>
+      </div>
+
+      <div class="decision-card">
+        <div class="decision-num con">4</div>
+        <div class="decision-title">Decision title — <em class="placeholder-text">to be filled in by group</em></div>
+        <div class="score-row">
+          <span class="score-label">Earnestness score:</span>
+          <span class="score-value placeholder-text">–</span>
+        </div>
+        <div class="decision-body placeholder-text">
+          2–3 sentence rationale explaining how this decision makes the visualization persuasive,
+          what worked, what alternatives were considered, and why you settled on this one.
+        </div>
+      </div>
+
+      <div class="decision-card">
+        <div class="decision-num con">5</div>
+        <div class="decision-title">Decision title — <em class="placeholder-text">to be filled in by group</em></div>
+        <div class="score-row">
+          <span class="score-label">Earnestness score:</span>
+          <span class="score-value placeholder-text">–</span>
+        </div>
+        <div class="decision-body placeholder-text">
+          2–3 sentence rationale explaining how this decision makes the visualization persuasive,
+          what worked, what alternatives were considered, and why you settled on this one.
+        </div>
+      </div>
+
+    </div><!-- /con-decisions -->
+  </div><!-- /card -->
+
+  <!-- ═══════════════ REFLECTION ═══════════════ -->
+  <div class="card">
+    <div class="section-heading">Final Reflection</div>
+    <h2>Overall Design Process</h2>
+    <div class="reflection-body">
+      <p class="placeholder-text">
+        [Paragraph 1 — to be filled in by group] Describe what was straightforward or
+        difficult about the overall design process across both visualizations. What
+        surprised you most?
+      </p>
+      <p class="placeholder-text">
+        [Paragraph 2 — to be filled in by group] How do you now define "ethical analysis
+        and visualization"? Reflect on how working on both sides of the proposition
+        changed your perspective.
+      </p>
+      <p class="placeholder-text">
+        [Paragraph 3 — to be filled in by group] What bounds (if any) can you draw to
+        distinguish "acceptable" persuasive choices from "misleading" ones? If no clear
+        line exists, explain why.
+      </p>
+    </div>
+  </div>
+
+</main>
+
+<!-- ════════════════════════ FOOTER ════════════════════════ -->
+<footer>
+  DSC 106 · Project 2 · University of California San Diego · Spring 2025
+</footer>
+
+</body>
+</html>
