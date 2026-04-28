@@ -319,70 +319,65 @@
     <h3>Design Decisions &amp; Rationale</h3>
     <div class="decisions-grid" id="pro-decisions">
 
-      <div class="decision-card">
-        <div class="decision-num pro">1</div>
-        <div class="decision-title">Decision title — <em class="placeholder-text">to be filled in by group</em></div>
-        <div class="score-row">
-          <span class="score-label">Earnestness score:</span>
-          <span class="score-value placeholder-text">–</span>
-        </div>
-        <div class="decision-body placeholder-text">
-          2–3 sentence rationale explaining how this decision makes the visualization persuasive,
-          what worked, what alternatives were considered, and why you settled on this one.
-        </div>
+          <div class="decision-card">
+      <div class="decision-num pro">1</div>
+      <div class="decision-title">Tertiary enrollment as a mediating variable</div>
+      <div class="score-row">
+        <span class="score-label">Earnestness score:</span>
+        <span class="score-value">+1</span>
       </div>
-
-      <div class="decision-card">
-        <div class="decision-num pro">2</div>
-        <div class="decision-title">Decision title — <em class="placeholder-text">to be filled in by group</em></div>
-        <div class="score-row">
-          <span class="score-label">Earnestness score:</span>
-          <span class="score-value placeholder-text">–</span>
-        </div>
-        <div class="decision-body placeholder-text">
-          2–3 sentence rationale explaining how this decision makes the visualization persuasive,
-          what worked, what alternatives were considered, and why you settled on this one.
-        </div>
+      <div class="decision-body">
+        Rather than directly plotting education spending vs. GDP — which shows a weak relationship — this chart introduces tertiary enrollment as a mediating step, grounding the argument in human capital theory. This is a legitimate and earnest analytical choice that strengthens the proposition by using a more theoretically meaningful outcome variable. We considered plotting spending directly against GDP but found enrollment produced a cleaner, more defensible narrative.
       </div>
-
-      <div class="decision-card">
-        <div class="decision-num pro">3</div>
-        <div class="decision-title">Decision title — <em class="placeholder-text">to be filled in by group</em></div>
-        <div class="score-row">
-          <span class="score-label">Earnestness score:</span>
-          <span class="score-value placeholder-text">–</span>
-        </div>
-        <div class="decision-body placeholder-text">
-          2–3 sentence rationale explaining how this decision makes the visualization persuasive,
-          what worked, what alternatives were considered, and why you settled on this one.
-        </div>
+    </div>
+    
+    <div class="decision-card">
+      <div class="decision-num pro">2</div>
+      <div class="decision-title">Percentile binning smooths within-group variance</div>
+      <div class="score-row">
+        <span class="score-label">Earnestness score:</span>
+        <span class="score-value">-0.5</span>
       </div>
-
-      <div class="decision-card">
-        <div class="decision-num pro">4</div>
-        <div class="decision-title">Decision title — <em class="placeholder-text">to be filled in by group</em></div>
-        <div class="score-row">
-          <span class="score-label">Earnestness score:</span>
-          <span class="score-value placeholder-text">–</span>
-        </div>
-        <div class="decision-body placeholder-text">
-          2–3 sentence rationale explaining how this decision makes the visualization persuasive,
-          what worked, what alternatives were considered, and why you settled on this one.
-        </div>
+      <div class="decision-body">
+        Grouping countries into 10th-percentile enrollment bins and averaging GDP within each bin smooths over enormous within-group variance. The 30–40th percentile bin ($2.8k) dips below the 20–30th ($5.1k), which is an awkward contradiction — but because it's one blip in a generally upward staircase, it reads as noise rather than a refutation. A continuous scatter would expose the messiness more honestly.
       </div>
-
-      <div class="decision-card">
-        <div class="decision-num pro">5</div>
-        <div class="decision-title">Decision title — <em class="placeholder-text">to be filled in by group</em></div>
-        <div class="score-row">
-          <span class="score-label">Earnestness score:</span>
-          <span class="score-value placeholder-text">–</span>
-        </div>
-        <div class="decision-body placeholder-text">
-          2–3 sentence rationale explaining how this decision makes the visualization persuasive,
-          what worked, what alternatives were considered, and why you settled on this one.
-        </div>
+    </div>
+    
+    <div class="decision-card">
+      <div class="decision-num pro">3</div>
+      <div class="decision-title">Red-to-green traffic-light color gradient</div>
+      <div class="score-row">
+        <span class="score-label">Earnestness score:</span>
+        <span class="score-value">-1</span>
       </div>
+      <div class="decision-body">
+        The color ramp from red (low enrollment) to dark green (high enrollment) borrows traffic-light connotations — red means bad, green means good — priming the reader emotionally before they read any values. An earnest choice would use a single neutral hue with varying lightness. We settled on the gradient because it dramatically reinforces the staircase narrative and makes the direction of the argument unmistakable at a glance.
+      </div>
+    </div>
+    
+    <div class="decision-card">
+      <div class="decision-num pro">4</div>
+      <div class="decision-title">Bold "Lowest/Highest Tertiary Enrollment" anchor annotations</div>
+      <div class="score-row">
+        <span class="score-label">Earnestness score:</span>
+        <span class="score-value">-0.5</span>
+      </div>
+      <div class="decision-body">
+        The large red and green text labels anchored to the leftmost and rightmost bars direct the reader's eye to the extremes and reinforce the color coding. This discourages attention to the non-monotonic middle bars and dramatizes the contrast between the two ends of the distribution. Removing them would make the chart more neutral, but we kept them because they make the proposition immediately legible to a casual reader.
+      </div>
+    </div>
+    
+    <div class="decision-card">
+      <div class="decision-num pro">5</div>
+      <div class="decision-title">Dollar-value labels on every bar</div>
+      <div class="score-row">
+        <span class="score-label">Earnestness score:</span>
+        <span class="score-value">+1</span>
+      </div>
+      <div class="decision-body">
+        Every bar is labeled with its exact average GDP per capita value, which is a fully earnest transparency choice — readers can verify the numbers without relying on the y-axis alone. This also makes the jump from $0.4k at the bottom to $22.4k at the top feel concrete and striking rather than abstract. We considered omitting labels to keep the chart cleaner, but the specific values make the magnitude of the gap more persuasive.
+      </div>
+    </div>
 
     </div><!-- /pro-decisions -->
   </div><!-- /card -->
@@ -405,70 +400,65 @@
     <h3>Design Decisions &amp; Rationale</h3>
     <div class="decisions-grid" id="con-decisions">
 
-      <div class="decision-card">
-        <div class="decision-num con">1</div>
-        <div class="decision-title">Decision title — <em class="placeholder-text">to be filled in by group</em></div>
-        <div class="score-row">
-          <span class="score-label">Earnestness score:</span>
-          <span class="score-value placeholder-text">–</span>
-        </div>
-        <div class="decision-body placeholder-text">
-          2–3 sentence rationale explaining how this decision makes the visualization persuasive,
-          what worked, what alternatives were considered, and why you settled on this one.
-        </div>
+          <div class="decision-card">
+      <div class="decision-num pro">1</div>
+      <div class="decision-title">Quartile grouping instead of continuous data</div>
+      <div class="score-row">
+        <span class="score-label">Earnestness score:</span>
+        <span class="score-value">-1</span>
       </div>
-
-      <div class="decision-card">
-        <div class="decision-num con">2</div>
-        <div class="decision-title">Decision title — <em class="placeholder-text">to be filled in by group</em></div>
-        <div class="score-row">
-          <span class="score-label">Earnestness score:</span>
-          <span class="score-value placeholder-text">–</span>
-        </div>
-        <div class="decision-body placeholder-text">
-          2–3 sentence rationale explaining how this decision makes the visualization persuasive,
-          what worked, what alternatives were considered, and why you settled on this one.
-        </div>
+      <div class="decision-body">
+        Rather than showing a continuous scatter of spending vs. enrollment, countries are binned into four spending quartiles. This obscures the fact that there is a general positive trend in the raw data — when you average within groups, the messiness within each quartile becomes the story instead. An earnest approach would show individual country points overlaid, making any underlying trend more visible.
       </div>
-
-      <div class="decision-card">
-        <div class="decision-num con">3</div>
-        <div class="decision-title">Decision title — <em class="placeholder-text">to be filled in by group</em></div>
-        <div class="score-row">
-          <span class="score-label">Earnestness score:</span>
-          <span class="score-value placeholder-text">–</span>
-        </div>
-        <div class="decision-body placeholder-text">
-          2–3 sentence rationale explaining how this decision makes the visualization persuasive,
-          what worked, what alternatives were considered, and why you settled on this one.
-        </div>
+    </div>
+    
+    <div class="decision-card">
+      <div class="decision-num pro">2</div>
+      <div class="decision-title">Highlighting that the highest-spending median falls below upper-middle</div>
+      <div class="score-row">
+        <span class="score-label">Earnestness score:</span>
+        <span class="score-value">-1.5</span>
       </div>
-
-      <div class="decision-card">
-        <div class="decision-num con">4</div>
-        <div class="decision-title">Decision title — <em class="placeholder-text">to be filled in by group</em></div>
-        <div class="score-row">
-          <span class="score-label">Earnestness score:</span>
-          <span class="score-value placeholder-text">–</span>
-        </div>
-        <div class="decision-body placeholder-text">
-          2–3 sentence rationale explaining how this decision makes the visualization persuasive,
-          what worked, what alternatives were considered, and why you settled on this one.
-        </div>
+      <div class="decision-body">
+        The annotation explicitly calls out "Highest-spending median falls below upper-middle," drawing attention to a single non-monotonic quirk in the data. This is a cherry-picked observation — the overall pattern across the four violins does show increasing enrollment with spending, but by spotlighting this one reversal the reader is led to conclude the whole relationship is invalid. The annotation does the rhetorical heavy lifting.
       </div>
-
-      <div class="decision-card">
-        <div class="decision-num con">5</div>
-        <div class="decision-title">Decision title — <em class="placeholder-text">to be filled in by group</em></div>
-        <div class="score-row">
-          <span class="score-label">Earnestness score:</span>
-          <span class="score-value placeholder-text">–</span>
-        </div>
-        <div class="decision-body placeholder-text">
-          2–3 sentence rationale explaining how this decision makes the visualization persuasive,
-          what worked, what alternatives were considered, and why you settled on this one.
-        </div>
+    </div>
+    
+    <div class="decision-card">
+      <div class="decision-num pro">3</div>
+      <div class="decision-title">Violin shape emphasizes spread over central tendency</div>
+      <div class="score-row">
+        <span class="score-label">Earnestness score:</span>
+        <span class="score-value">-1</span>
       </div>
+      <div class="decision-body">
+        Violin plots are chosen over bar charts or dot plots specifically because they make within-group variance visually dominant. The wide, overlapping shapes make the distributions look interchangeable across spending groups, which visually implies no meaningful difference. A bar chart showing group medians would have made the modest upward trend much more obvious and harder to dispute.
+      </div>
+    </div>
+    
+    <div class="decision-card">
+      <div class="decision-num pro">4</div>
+      <div class="decision-title">Muted, nearly identical color palette across groups</div>
+      <div class="score-row">
+        <span class="score-label">Earnestness score:</span>
+        <span class="score-value">-0.5</span>
+      </div>
+      <div class="decision-body">
+        All four violins use very similar dusty rose/mauve tones with only slight darkening from left to right. This minimizes any sense of progression across spending groups — a more earnest design might use a clearer color ramp to visually encode the ordering. The near-identical colors make the groups feel equivalent before the reader even looks at the shapes.
+      </div>
+    </div>
+    
+    <div class="decision-card">
+      <div class="decision-num pro">5</div>
+      <div class="decision-title">"Heavy overlap across spending groups" editorial annotation</div>
+      <div class="score-row">
+        <span class="score-label">Earnestness score:</span>
+        <span class="score-value">-1</span>
+      </div>
+      <div class="decision-body">
+        This annotation tells the reader what conclusion to draw from the overlapping distributions before they can form their own interpretation. While the overlap is real, framing it as the headline finding ignores that the medians do shift upward from Q1 to Q3. The annotation steers interpretation toward variance and away from central tendency, which is the weaker part of the argument for the proposition.
+      </div>
+    </div>
 
     </div><!-- /con-decisions -->
   </div><!-- /card -->
